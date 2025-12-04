@@ -1,0 +1,29 @@
+# ai-video-studio — starter repo
+
+A scaffold for a text→video + ebook pipeline.  
+Features:
+- Prompt-based text→video worker pipeline (provider-agnostic).
+- Bulk job support (max 100 videos per batch).
+- URL ingestion (download & clip extraction hooks).
+- Subtitles (transcription adapter) and TTS voiceover adapter.
+- S3-compatible storage (MinIO) + Redis queue (BullMQ).
+- React frontend with prompt form + bulk uploader.
+
+**Important**: This is a scaffold. Replace the provider adapters (backend/src/providers/*.js) with real API calls to the text→video / transcription / TTS services you choose (Replicate, Stability, Runway, local models, etc.).
+
+## Quick start (dev)
+1. Copy `.env.example` → `.env` and fill values.
+2. `docker-compose up` (starts Redis and MinIO).
+3. Backend: `cd backend && npm install && npm run dev`
+4. Frontend: `cd frontend && npm install && npm start`
+5. Open the React app and try the prompt. Or run `node scripts/enqueue_bulk_example.js`.
+
+## Architecture
+- Express API receives generation requests and enqueues jobs.
+- Worker processes jobs with concurrency control and enforces max-100 per bulk.
+- Storage holds raw assets and final video files (S3).
+- Provider adapters encapsulate external APIs for video generation, transcription, and TTS.
+
+## Where to plug real providers
+`backend/src/providers/replicate_provider.js` is an example adapter. Replace with your provider(s).
+
