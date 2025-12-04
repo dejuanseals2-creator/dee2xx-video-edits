@@ -1,0 +1,22 @@
+ai-video-studio/
+├─ README.md
+├─ docker-compose.yml
+├─ .env.example
+├─ backend/
+│  ├─ package.json
+│  ├─ src/
+│  │  ├─ server.js
+│  │  ├─ queue.js
+│  │  ├─ worker.js
+│  │  ├─ providers/
+│  │  │  ├─ provider_base.js
+│  │  │  └─ replicate_provider.js
+│  │  ├─ storage.js
+│  │  └─ utils.js
+├─ frontend/
+│  ├─ package.json
+│  └─ src/
+│     ├─ App.jsx
+│     └─ api.js
+└─ scripts/
+   └─ enqueue_bulk_example.js
